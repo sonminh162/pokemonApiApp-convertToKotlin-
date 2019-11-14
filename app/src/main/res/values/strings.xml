@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">kotlin_pokemonApi</string>
+    <string name="title">Squirtle</string>
+    <string name="any">any</string>
+    <string name="content_example">Squirtle’s shell is not merely used for protection. The shell’s rounded shape and the grooves on its surface help minimize resistance in water, enabling this pokemon to swim at high speed.</string>
+    <string name="hp">HP</string>
+    <string name="atk">ATK</string>
+    <string name="def">DEF</string>
+    <string name="satk">SATK</string>
+    <string name="sdef">SDEF</string>
+    <string name="spd">SPD</string>
+    <string name="_000">000</string>
+    <string name="stats">STATS</string>
+    <string name="moves">MOVES</string>
+    <string name="evolution">EVOLUTION</string>
+    <string name="enter_pokemon_name">Enter Pokemon Name/ID</string>
+    <string name="evolution_information_text">Evolution Information</string>
+</resources>

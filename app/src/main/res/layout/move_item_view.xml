@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:background="#fafafa"
+        android:id="@+id/move_box"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="67dp"/>
+
+    <View
+        android:layout_marginStart="22dp"
+        android:id="@+id/item_view_line"
+        android:background="#e3e3e3"
+        app:layout_constraintTop_toBottomOf="@id/move_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="1dp"/>
+
+    <View
+        android:background="#fafafa"
+        app:layout_constraintTop_toBottomOf="@id/item_view_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/moveName"
+        android:textSize="17sp"
+        android:textColor="#4f4f4f"
+        android:text="Tail Whip"
+        app:layout_constraintBottom_toTopOf="@id/item_view_line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/item_view_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

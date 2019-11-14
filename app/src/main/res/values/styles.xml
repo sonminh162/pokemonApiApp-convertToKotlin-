@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/navyBlueDark</item>
+        <item name="colorPrimaryDark">@color/navyBlueDark</item>
+        <item name="colorAccent">#67c1cc</item>
+    </style>
+
+    <style name="font">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="font_evolution">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="number">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="button_style">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/button_box</item>
+        <item name="android:textColor">@color/white_two</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="button_style_unselected">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/button_box_unselected</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+</resources>
