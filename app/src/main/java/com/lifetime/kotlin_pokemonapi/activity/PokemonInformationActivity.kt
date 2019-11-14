@@ -19,7 +19,27 @@ import com.lifetime.kotlin_pokemonapi.viewmodel.PokemonViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
-class PokemonInformationActivity : AppCompatActivity() {
+@Suppress("DEPRECATION")
+class PokemonInformationActivity : AppCompatActivity(),View.OnClickListener {
+    override fun onClick(p0: View?) {
+        turnOffState(statButton)
+        turnOffState(evolutionButton)
+        turnOffState(movesButton)
+        when(p0){
+            statButton->{
+                turnOnState(statButton)
+                loadFragment(statFragment)
+            }
+            evolutionButton->{
+                turnOnState(evolutionButton)
+                loadFragment(evolutionFragment)
+            }
+            movesButton->{
+                turnOnState(movesButton)
+                loadFragment(moveFragment)
+            }
+        }
+    }
 
     var searchKey: String = ""
 
@@ -33,16 +53,15 @@ class PokemonInformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        searchKey = intent.extras?.getString(SEARCH_KEY)!!
+        searchKey = intent.extras?.getString(SEARCH_KEY) ?:""
 
         pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
-        pokemonViewModel!!.init()
-
-        pokemonViewModel!!.getName(searchKey)
-        pokemonViewModel!!.getDescription(searchKey)
-        pokemonViewModel!!.getUrlImage(searchKey)
-
         setUpUi()
+
+        pokemonViewModel?.getName(searchKey)
+        pokemonViewModel?.getDescription(searchKey)
+        pokemonViewModel?.getUrlImage(searchKey)
+
     }
 
     private fun setUpUi(){
@@ -50,8 +69,6 @@ class PokemonInformationActivity : AppCompatActivity() {
         initFirstTimeFragment()
 
         loadFragment(statFragment)
-
-        setUpFragmentFeature()
 
         closeButton.setOnClickListener{finish()}
 
@@ -63,43 +80,15 @@ class PokemonInformationActivity : AppCompatActivity() {
 
         pokemonViewModel?.urlImageMutableLiveData?.observe(this,
             Observer<String> { t ->
-                Picasso.get()
-                    .load(t)
-                    .into(pokemonView)
+                if (t.isNotBlank()){
+                    Picasso.get()
+                        .load(t)
+                        .error(R.drawable.background_box)
+                        .into(pokemonView)
+                }else{
+                    pokemonView.setImageResource(R.drawable.not_found_img)
+                }
             })
-    }
-
-    private fun setUpFragmentFeature(){
-        val buttons: ArrayList<Button> = ArrayList()
-        buttons.add(statButton)
-        buttons.add(evolutionButton)
-        buttons.add(movesButton)
-
-        statButton.setOnClickListener {
-            buttons[0].isSelected = true
-            buttons[1].isSelected = false
-            buttons[2].isSelected = false
-            queryButton(buttons)
-
-            loadFragment(statFragment)
-        }
-
-        movesButton.setOnClickListener{
-            buttons[2].isSelected = true
-            buttons[0].isSelected = false
-            buttons[1].isSelected = false
-            queryButton(buttons)
-
-            loadFragment(moveFragment)
-        }
-
-        evolutionButton.setOnClickListener {
-            buttons[1].isSelected = true
-            buttons[0].isSelected = false
-            buttons[2].isSelected = false
-
-            loadFragment(evolutionFragment)
-        }
     }
 
     private fun initFirstTimeFragment(){
@@ -115,16 +104,13 @@ class PokemonInformationActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun queryButton(buttons: List<Button>){
-        for(i: Int in 0 until buttons.size){
-            val currentButton: Button = buttons[i]
-            if(currentButton.isSelected){
-                currentButton.background = resources.getDrawable(R.drawable.button_box)
-                currentButton.setTextColor(resources.getColor(R.color.white_two))
-            } else {
-                currentButton.background = resources.getDrawable(R.drawable.background_box)
-                currentButton.setTextColor(resources.getColor(R.color.dark_blue))
-            }
-        }
+    private fun turnOnState(currentButton: Button){
+        currentButton.background = resources.getDrawable(R.drawable.button_box)
+        currentButton.setTextColor(resources.getColor(R.color.white_two))
+    }
+
+    private fun turnOffState(currentButton: Button){
+        currentButton.background = resources.getDrawable(R.drawable.background_box)
+        currentButton.setTextColor(resources.getColor(R.color.dark_blue))
     }
 }

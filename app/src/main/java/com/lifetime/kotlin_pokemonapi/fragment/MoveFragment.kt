@@ -34,7 +34,6 @@ class MoveFragment : Fragment() {
             view = inflater.inflate(R.layout.move_fragment,container,false)
 
             var pokemonViewModel: PokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
-            pokemonViewModel.init()
 
             pokemonViewModel.getMoves(searchKey)
 

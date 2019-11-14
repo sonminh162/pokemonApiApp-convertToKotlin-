@@ -31,7 +31,6 @@ class StatFragment: Fragment() {
             view = inflater.inflate(R.layout.stat_fragment, container, false)
 
             val pokemonViewModel: PokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
-            pokemonViewModel.init()
 
             pokemonViewModel.getStats(searchKey)
 

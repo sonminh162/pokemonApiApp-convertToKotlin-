@@ -26,7 +26,7 @@ class PokemonViewModel : ViewModel() {
 
     var validResult: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun init() {
+    init {
         pokemonApi = RetrofitClientInstance.createService()
     }
 
@@ -44,7 +44,6 @@ class PokemonViewModel : ViewModel() {
                 } else {
                     validResult.value = false
                 }
-
             }
 
         })
@@ -77,6 +76,7 @@ class PokemonViewModel : ViewModel() {
             override fun onResponse(call: Call<ImageResponse>, response: Response<ImageResponse>) {
                 val imageResponse: ImageResponse? = response.body()
                 var sprite: Sprite? = imageResponse?.sprite
+                urlImageMutableLiveData.value = sprite?.linkUrl?:""
             }
         })
     }

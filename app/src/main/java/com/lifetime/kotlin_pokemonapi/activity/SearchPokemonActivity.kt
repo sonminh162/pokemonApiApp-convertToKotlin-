@@ -25,8 +25,6 @@ class SearchPokemonActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search_pokemon)
 
         pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
-        pokemonViewModel?.init()
-
         searchText.setOnEditorActionListener(fun(
             _: TextView,
             i: Int,
@@ -44,12 +42,12 @@ class SearchPokemonActivity : AppCompatActivity() {
         })
 
         pokemonViewModel?.validResult?.observe(this, Observer<Boolean> { t ->
-            if(t!!){
-                var intent: Intent = Intent(this@SearchPokemonActivity,PokemonInformationActivity::class.java)
+            if(t){
+                val intent = Intent(this@SearchPokemonActivity,PokemonInformationActivity::class.java)
                 intent.putExtra(SEARCH_KEY, searchKey)
                 startActivity(intent)
             } else {
-                Toast.makeText(this@SearchPokemonActivity, "New User Created", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SearchPokemonActivity, "Not found", Toast.LENGTH_LONG).show()
             }
         })
     }
