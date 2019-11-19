@@ -33,20 +33,17 @@ class MoveFragment : Fragment() {
         if(view == null) {
             view = inflater.inflate(R.layout.move_fragment,container,false)
 
-            var pokemonViewModel: PokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
+            val pokemonViewModel: PokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
 
-            pokemonViewModel.getMoves(searchKey)
+            pokemonViewModel.getMoves(this,searchKey)
 
-            pokemonViewModel.movesMutableLiveData.observe(this, object : Observer<List<String>> {
-                override fun onChanged(strings: List<String>?) {
-                    initView(strings!!)
-                }
-            })
+            pokemonViewModel.movesMutableLiveData.observe(this,
+                Observer<List<String>> { strings -> initView(strings!!) })
         }
         return view
     }
 
-    fun initView(strings: List<String>){
+    private fun initView(strings: List<String>){
         recyclerViewMove.hasFixedSize()
 
         val layoutManager = LinearLayoutManager(activity)
@@ -59,5 +56,11 @@ class MoveFragment : Fragment() {
 
         val adapter = MoveAdapter(moveInfors)
         recyclerViewMove.adapter = adapter
+    }
+
+    fun checkFinishApi(countState: Int){
+        if(countState == 0){
+            moveFrameLayout.visibility = View.GONE
+        }
     }
 }

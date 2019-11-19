@@ -32,7 +32,7 @@ class StatFragment: Fragment() {
 
             val pokemonViewModel: PokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
 
-            pokemonViewModel.getStats(searchKey)
+            pokemonViewModel.getStatsInFragment(this,searchKey)
 
             pokemonViewModel.statsMutableLiveData.observe(this,
                 Observer<List<Stat>> { stats -> updateViewStats(stats!!) })
@@ -41,7 +41,7 @@ class StatFragment: Fragment() {
         return view
     }
 
-    fun updateViewStats(stats: List<Stat>){
+    private fun updateViewStats(stats: List<Stat>){
         hpProgressBar.progress = stats[5].baseStat*2/3
         hpProgressBar.progressDrawable = resources.getDrawable(R.drawable.background_progress)
         atkProgressBar.progress = stats[4].baseStat*2/3
@@ -61,5 +61,11 @@ class StatFragment: Fragment() {
         statSpd.text = stats[0].baseStat.toString()
         statSatk.text = stats[2].baseStat.toString()
         statSdef.text = stats[1].baseStat.toString()
+    }
+
+    fun checkFinishApi(countState: Int){
+        if(countState == 0){
+            frameLayoutStat.visibility = View.GONE
+        }
     }
 }
